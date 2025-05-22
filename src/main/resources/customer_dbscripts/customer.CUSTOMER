@@ -1,0 +1,191 @@
+use customer;
+
+// Insert documents into the customers collection
+db.Customer.insertMany([
+  {
+    "_id": ObjectId("66729b1ee7824f2883ab7308"),
+    "customerNumber": 1,
+    "firstName": "muhammmad",
+    "lastName": "aiman",
+    "emailId": "aiman@gmail.com",
+    "phoneNumber": "8989876765",
+    "customerType": "GUEST",
+    "addressId": 1,
+    "_class": "com.customerservice.entity.Customer"
+  },
+  {
+    "_id": ObjectId("6675aae75ee56404c6931cfd"),
+    "customerNumber": 2,
+    "firstName": "muhammmad",
+    "lastName": "saadhik",
+    "emailId": "saadhik@gmail.com",
+    "phoneNumber": "8989876761",
+    "customerType": "GUEST",
+    "addressId": 1,
+    "_class": "com.customerservice.entity.Customer"
+  },
+  {
+    "_id": ObjectId("667bb509e5259f1aad0b386b"),
+    "customerNumber": 3,
+    "firstName": "muhammmad",
+    "lastName": "faizal",
+    "emailId": "faizal@gmail.com",
+    "phoneNumber": "8989876791",
+    "customerType": "GUEST",
+    "addressId": 1,
+    "_class": "com.customerservice.entity.Customer"
+  },
+  {
+    "_id": ObjectId("667bb70644bef17036a455a0"),
+    "customerNumber": 4,
+    "firstName": "bala",
+    "lastName": "krishna",
+    "emailId": "bala@gmail.com",
+    "phoneNumber": "8989816791",
+    "customerType": "GUEST",
+    "addressId": 1,
+    "_class": "com.customerservice.entity.Customer"
+  },
+  {
+    "_id": ObjectId("667cfdbf1aa1d73bd9295246"),
+    "customerNumber": 5,
+    "firstName": "sai",
+    "lastName": "sai",
+    "emailId": "sai@gmail.com",
+    "phoneNumber": "8989876791",
+    "customerType": "GUEST",
+    "addressId": 1,
+    "_class": "com.customerservice.entity.Customer"
+  },
+  {
+    "_id": ObjectId("667d0cf83e45187c8bed23cf"),
+    "customerNumber": 6,
+    "firstName": "abdul",
+    "lastName": "abdul",
+    "emailId": "abdul@gmail.com",
+    "phoneNumber": "8989876091",
+    "customerType": "GUEST",
+    "addressId": 1,
+    "_class": "com.customerservice.entity.Customer"
+  },
+  {
+    "_id": ObjectId("667d5aac8cb430647a57f42f"),
+    "customerNumber": 7,
+    "firstName": "krishna",
+    "lastName": "vignesh",
+    "emailId": "vignesh@gmail.com",
+    "phoneNumber": "8989176091",
+    "customerType": "GUEST",
+    "addressId": 1,
+    "_class": "com.customerservice.entity.Customer"
+  },
+  {
+    "_id": ObjectId("6684df2596f8b80a76e6658b"),
+    "customerNumber": 8,
+    "firstName": "Sreelakshmi",
+    "lastName": "Shaji",
+    "emailId": "sree@gmail.com",
+    "phoneNumber": "999999999",
+    "customerType": "GUEST",
+    "addressId": 23,
+    "_class": "com.customerservice.entity.Customer"
+  },
+  {
+    "_id": ObjectId("6684e743e08b273bbc600a87"),
+    "customerNumber": 9,
+    "firstName": "addressList",
+    "lastName": "addressList",
+    "emailId": "test@gmail.com",
+    "phoneNumber": "9898989891",
+    "customerType": "GUEST",
+    "addressId": 22,
+    "_class": "com.customerservice.entity.Customer"
+  },
+  {
+    "_id": ObjectId("668e30914d134121a2336ddc"),
+    "customerNumber": 10,
+    "firstName": "abcdefg",
+    "lastName": "hikuju",
+    "emailId": "popopo@gmail.com",
+    "phoneNumber": "8919176022",
+    "customerType": "GUEST",
+    "addressId": 24,
+    "_class": "com.customerservice.entity.Customer"
+  },
+  {
+    "_id": ObjectId("66d151cc26f7213b60e8e00d"),
+    "customerNumber": 18,
+    "firstName": "abdul",
+    "lastName": "raja",
+    "emailId": "majeeth@gmail.com",
+    "customerType": "REGISTERED",
+    "addressId": 32,
+    "password": "$2a$10$h1K0DQjs5DVNypO12GqlxOWfGAd58Uk4cxsXnEpHUmbJL3aQiv3Ma",
+    "_class": "com.customerservice.entity.Customer"
+  },
+  {
+    "_id": ObjectId("66d9522d03809b5b11c3ce55"),
+    "customerNumber": 19,
+    "firstName": "vignesh",
+    "lastName": "krihna",
+    "emailId": "aaaaaaa@gmail.com",
+    "customerType": "REGISTERED",
+    "password": "$2a$10$puIeOb9jjx2XfIRxyViteeoMsFbZjJbQyKbkPZL1PoYCVPqzbCDhe",
+    "_class": "com.customerservice.entity.Customer"
+  },
+  {
+    "_id": ObjectId("66d952b503809b5b11c3ce56"),
+    "customerNumber": 20,
+    "firstName": "vignesh",
+    "lastName": "krihna",
+    "emailId": "aaaaaaabb@gmail.com",
+    "customerType": "REGISTERED",
+    "addressId": 35,
+    "password": "$2a$10$LiOJyTNw5Efym9k81WEBreeOagKLXfbfCrdSHI4tfq7chEIzN6o8e",
+    "_class": "com.customerservice.entity.Customer"
+  },
+  {
+    "_id": ObjectId("66d9a3ef1cc51244d06c3c6a"),
+    "customerNumber": 21,
+    "firstName": "sivaqqq",
+    "lastName": "raman",
+    "emailId": "sivaqq@gmail.com",
+    "customerType": "REGISTERED",
+    "password": "$2a$10$PVFTVuW5KTDsfFHqUHV9MOhKyVJdf8lQSX70/F7dA3vFn6eTs67Pi",
+    "_class": "com.customerservice.entity.Customer"
+  },
+  {
+    "_id": ObjectId("66da9282024fab0108984e4c"),
+    "customerNumber": 22,
+    "firstName": "vignesh",
+    "lastName": "krihna",
+    "emailId": "aaaaaaa@gmail.com",
+    "customerType": "REGISTERED",
+    "password": "$2a$10$YAbpHPHc3NUji9EiAa2CHuP/AXFtml5Vgj2Y.3W.e01ZOlyMNWSdC",
+    "_class": "com.customerservice.entity.Customer"
+  },
+  {
+    "_id": ObjectId("66da9294024fab0108984e4d"),
+    "customerNumber": 23,
+    "firstName": "demo",
+    "lastName": "auras",
+    "emailId": "demo@gmail.com",
+    "customerType": "REGISTERED",
+    "addressId": 36,
+    "password": "$2a$10$qQpwtjf3LjrpLSL.ppQyaexTjtetgA0PW38Xq3RyYjObedK36R3Hi",
+    "_class": "com.customerservice.entity.Customer"
+  },
+  {
+    "_id": ObjectId("66da99d4ba838c5f67a90d6b"),
+    "customerNumber": 24,
+    "firstName": "demo",
+    "lastName": "auras1",
+    "emailId": "demo1@gmail.com",
+    "customerType": "REGISTERED",
+    "password": "$2a$10$I/SRr5j8Ybj5tfCU.noB/OThcz1/UOccDUrZXk1.uqPPpm0.4ZDc6",
+    "_class": "com.customerservice.entity.Customer"
+  }
+]);
+
+// Verify the data insertion
+db.customer.find().pretty();

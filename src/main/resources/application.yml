@@ -1,0 +1,11 @@
+server:
+  servlet:
+    context-path: "/customer-api"
+  port: 8092
+
+#MONGODB
+spring:
+  data:
+    mongodb:
+       uri: "mongodb://auras-dc-dev-cosmos-db:fMkH1hmNazkjXCZsNTuXExrXjpmssjhM49974GbWP3LmLljAwzNhO0KjNcK0CdKrKcQhVe9YcQ2JACDbsth8Kw%3D%3D@auras-dc-dev-cosmos-db.mongo.cosmos.azure.com:10255/?ssl=true&retrywrites=false&replicaSet=globaldb&maxIdleTimeMS=120000&appName=@auras-dc-dev-cosmos-db@"
+       database: "customer"
