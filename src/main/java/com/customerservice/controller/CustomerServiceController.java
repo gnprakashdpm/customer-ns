@@ -55,8 +55,8 @@ import io.swagger.annotations.ApiResponses;
 public class CustomerServiceController {
 	private static final Logger LOGGER = LoggerFactory.getLogger(CustomerServiceController.class);
 
-	@Autowired
-	private CustomerService CustomerService;
+       @Autowired
+       private CustomerService customerService;
 
 	@ApiOperation(value = "getCustomer", notes = "Gets the customer information by key")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Success", response = String.class),
@@ -66,7 +66,7 @@ public class CustomerServiceController {
 	public Object getCustomer(@PathVariable Integer customerId) {
 		try {
 			LOGGER.debug("Get customer request received");
-			List<Customer> response = CustomerService.getCustomer(customerId);
+			List<Customer> response = customerService.getCustomer(customerId);
 			LOGGER.debug("Get customer request processed");
 			if (response == null) {
 				return ResponseEntity.status(HttpStatus.NOT_FOUND)
@@ -99,7 +99,7 @@ public class CustomerServiceController {
 			@RequestParam Long addressId) {
 		try {
 			LOGGER.debug("Get customer request received");
-			CustomerInsert response = CustomerService.addCustomer(requestBody, emailId, addressId);
+			CustomerInsert response = customerService.addCustomer(requestBody, emailId, addressId);
 			LOGGER.debug("Get customer request processed");
 			if (response == null) {
 				return ResponseEntity.status(HttpStatus.NOT_FOUND)
@@ -131,7 +131,7 @@ public class CustomerServiceController {
 	public Object addAddress(@RequestBody AddressRequest addressDTO) {
 		try {
 			LOGGER.debug("Get Address request received");
-			AddressInsert response = CustomerService.addAddress(addressDTO);
+			AddressInsert response = customerService.addAddress(addressDTO);
 			LOGGER.debug("Get Address request processed");
 			if (response == null) {
 				return ResponseEntity.status(HttpStatus.NOT_FOUND)
@@ -164,7 +164,7 @@ public class CustomerServiceController {
 	public Object userRegistration(@RequestBody UserRegisterRequest requestBody) {
 		try {
 			LOGGER.debug("Get customer request received");
-			UserRegisterInsert response = CustomerService.userRegistration(requestBody);
+			UserRegisterInsert response = customerService.userRegistration(requestBody);
 			LOGGER.debug("Get customer request processed");
 			if (response == null) {
 				return ResponseEntity.status(HttpStatus.NOT_FOUND)
@@ -198,7 +198,7 @@ public class CustomerServiceController {
 			@RequestBody AddressRequest requestBody) {
 		try {
 			LOGGER.debug("Get customer request received");
-			AddressInsert response = CustomerService.existinguserRegistration(customerNumber, emailId, requestBody);
+			AddressInsert response = customerService.existinguserRegistration(customerNumber, emailId, requestBody);
 			LOGGER.debug("Get customer request processed");
 			if (response == null) {
 				return ResponseEntity.status(HttpStatus.NOT_FOUND)
@@ -226,7 +226,7 @@ public class CustomerServiceController {
 	public Object login(@RequestBody LoginRequest requestbody) {
 		try {
 			LOGGER.debug("Get customer request received");
-			LoginInsert response = CustomerService.login(requestbody.getEmailId(), requestbody.getPassword());
+			LoginInsert response = customerService.login(requestbody.getEmailId(), requestbody.getPassword());
 			LOGGER.debug("Get customer request processed");
 			if (response == null) {
 				return ResponseEntity.status(HttpStatus.NOT_FOUND)
@@ -258,7 +258,7 @@ public class CustomerServiceController {
 	public Object fetchaddress(@PathVariable Integer addressId) {
 		try {
 			LOGGER.debug("Get product request received");
-			Address getAddress = CustomerService.fetchaddress(addressId);
+			Address getAddress = customerService.fetchaddress(addressId);
 			LOGGER.debug("Get product request processed");
 			if (getAddress == null) {
 				return ResponseEntity.status(HttpStatus.NOT_FOUND)
@@ -291,7 +291,7 @@ public class CustomerServiceController {
 			@RequestBody PromptRequest promptRequest, @RequestParam(required = false) String whom,
 			@RequestParam(required = false) String registered) {
 
-		EnquiryResponse response = CustomerService.createOrUpdateEnquiry(userId, promptRequest, whom, registered);
+		EnquiryResponse response = customerService.createOrUpdateEnquiry(userId, promptRequest, whom, registered);
 		return ResponseEntity.ok(response);
 	}
 
@@ -299,7 +299,7 @@ public class CustomerServiceController {
 	public ResponseEntity<Object> getTimeline(@RequestParam String storeCode, @RequestParam String granularity,
 			@RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
 			@RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
-		return ResponseEntity.ok(CustomerService.getIntentTimeline(storeCode, granularity, startDate, endDate));
+		return ResponseEntity.ok(customerService.getIntentTimeline(storeCode, granularity, startDate, endDate));
 	}
 
 	@GetMapping("/customer-enquiries/push-notification-stats")
@@ -307,7 +307,7 @@ public class CustomerServiceController {
 			@RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
 			@RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
 
-		PushNotificationStatsResponse response = CustomerService.getPushNotificationStats(storeCode, startDate,
+		PushNotificationStatsResponse response = customerService.getPushNotificationStats(storeCode, startDate,
 				endDate);
 		return ResponseEntity.ok(response);
 	}
@@ -319,7 +319,7 @@ public class CustomerServiceController {
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
 
-        List<IntentSummary> summary = CustomerService.getIntentSummary(storeCode, whom, startDate, endDate);
+        List<IntentSummary> summary = customerService.getIntentSummary(storeCode, whom, startDate, endDate);
         return ResponseEntity.ok(summary);
 
 }
@@ -332,7 +332,7 @@ public class CustomerServiceController {
 	@GetMapping("/geo-distribution")
 	public ResponseEntity<List<LocationStats>> getLocationStats(@RequestParam String storeCode, @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
 	@RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
-		List<LocationStats> stats = CustomerService.getLocationStats(storeCode, startDate, endDate);
+		List<LocationStats> stats = customerService.getLocationStats(storeCode, startDate, endDate);
 		if (stats.isEmpty()) {
 			return ResponseEntity.noContent().build();
 		}
@@ -350,7 +350,7 @@ public class CustomerServiceController {
 	       @RequestParam(required = false) 
 	       @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
 	
-	   PlatformOsDistributionResponse response = CustomerService
+	   PlatformOsDistributionResponse response = customerService
 	           .getPlatformOsDistributionForStore(storeCode, startDate, endDate);
 	   return ResponseEntity.ok(response);
 	}
@@ -365,7 +365,7 @@ public class CustomerServiceController {
 			@RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
 			@RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
 
-		List<QueryAnalyticsResponse> analysis = CustomerService.analyzeEnquiries(storeCode, startDate, endDate);
+		List<QueryAnalyticsResponse> analysis = customerService.analyzeEnquiries(storeCode, startDate, endDate);
 		return ResponseEntity.ok(analysis);
 	}
 
