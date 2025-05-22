@@ -20,8 +20,10 @@ public class Customer {
 	private String emailId;
 	private String phoneNumber;
 	private CustomerType customerType;
-	private Long addressId;
-	private String password;
+        private Long addressId;
+        private String password;
+       // Stores the last successful login timestamp in ISO-8601 format
+       private String lastLogin;
 
 	public Long getCustomerNumber() {
 		return customerNumber;
@@ -95,8 +97,16 @@ public class Customer {
 		return password;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+        public void setPassword(String password) {
+                this.password = password;
+        }
+
+       public String getLastLogin() {
+               return lastLogin;
+       }
+
+       public void setLastLogin(String lastLogin) {
+               this.lastLogin = lastLogin;
+       }
 
 }

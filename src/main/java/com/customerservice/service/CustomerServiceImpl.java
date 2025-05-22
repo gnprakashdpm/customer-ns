@@ -304,14 +304,17 @@ public class CustomerServiceImpl implements CustomerService {
 
 			Customer existingUser = userlogin.get();
 
-			if (passwordEncoder.matches(password, existingUser.getPassword())) {
+                        if (passwordEncoder.matches(password, existingUser.getPassword())) {
 
-				response.setCustomerNumber(existingUser.getCustomerNumber());
-				response.setEmailId(existingUser.getEmailId());
-				response.setPhoneNumber(existingUser.getPhoneNumber());
-				response.setPassword(existingUser.getPassword());
-				response.setMessage("Login successful.");
-				logger.info("Login successful.");
+                                response.setCustomerNumber(existingUser.getCustomerNumber());
+                                response.setEmailId(existingUser.getEmailId());
+                                response.setPhoneNumber(existingUser.getPhoneNumber());
+                                response.setPassword(existingUser.getPassword());
+                                response.setMessage("Login successful.");
+                                // update last login timestamp
+                                existingUser.setLastLogin(Instant.now().toString());
+                                customerRepo.save(existingUser);
+                                logger.info("Login successful.");
 			} else {
 
 				response.setMessage("Invalid credentials");
@@ -850,8 +853,8 @@ public class CustomerServiceImpl implements CustomerService {
 	    }
 
 	 @Override
-	 public List<QueryAnalyticsResponse> analyzeEnquiries(List<CustomerEnquiries> enquiries, String storeCode,
-	                                                      LocalDate startDate, LocalDate endDate) {
+    public List<QueryAnalyticsResponse> analyzeEnquiries(List<CustomerEnquiries> enquiries, String storeCode,
+                                                              LocalDate startDate, LocalDate endDate) {
 
 	     Optional<String> storeCodeOpt = Optional.ofNullable(storeCode);
 	     Optional<LocalDate> startDateOpt = Optional.ofNullable(startDate);
@@ -924,7 +927,28 @@ public class CustomerServiceImpl implements CustomerService {
 	         }
 	     }
 
-	     return new ArrayList<>(functionalityMap.values());
-	 }
+            return new ArrayList<>(functionalityMap.values());
+        }
+
+       @Override
+       public List<Customer> getInactiveCustomers(int days) {
+               try {
+                       List<Customer> all = customerRepo.findAll();
+                       Instant cutoff = Instant.now().minus(days, java.time.temporal.ChronoUnit.DAYS);
+                       return all.stream().filter(c -> {
+                               if (c.getLastLogin() == null)
+                                       return true;
+                               try {
+                                       Instant last = Instant.parse(c.getLastLogin());
+                                       return last.isBefore(cutoff);
+                               } catch (Exception e) {
+                                       return false;
+                               }
+                       }).collect(Collectors.toList());
+               } catch (Exception e) {
+                       logger.error("Error fetching inactive customers", e);
+                       return Collections.emptyList();
+               }
+       }
 	    
 }
