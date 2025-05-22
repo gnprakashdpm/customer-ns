@@ -50,9 +50,14 @@ public interface CustomerService {
 	
 	public PlatformOsDistributionResponse getPlatformOsDistributionForStore(String storeCode, LocalDate startDate, LocalDate endDate);
 	
-	public List<QueryAnalyticsResponse> analyzeEnquiries(List<CustomerEnquiries> enquiries, String storeCode,
-			LocalDate startDate, LocalDate endDate);
-	
-	 public List<QueryAnalyticsResponse> analyzeEnquiries(String storeCode, LocalDate startDate, LocalDate endDate);
+        public List<QueryAnalyticsResponse> analyzeEnquiries(List<CustomerEnquiries> enquiries, String storeCode,
+                        LocalDate startDate, LocalDate endDate);
+
+         public List<QueryAnalyticsResponse> analyzeEnquiries(String storeCode, LocalDate startDate, LocalDate endDate);
+
+       /**
+        * Returns customers who haven't logged in within the specified number of days.
+        */
+       List<Customer> getInactiveCustomers(int days);
 }
 

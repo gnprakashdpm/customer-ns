@@ -360,13 +360,22 @@ public class CustomerServiceController {
 			@ApiResponse(code = 404, message = "Not Found"), @ApiResponse(code = 500, message = "Failure") })
 	@CrossOrigin(origins = "*")
 	@GetMapping("/query-stats")
-	public ResponseEntity<List<QueryAnalyticsResponse>> analyzeEnquiries(
-			@RequestParam(required = false) String storeCode,
-			@RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
-			@RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
+        public ResponseEntity<List<QueryAnalyticsResponse>> analyzeEnquiries(
+                        @RequestParam(required = false) String storeCode,
+                        @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
+                        @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
 
-		List<QueryAnalyticsResponse> analysis = customerService.analyzeEnquiries(storeCode, startDate, endDate);
-		return ResponseEntity.ok(analysis);
-	}
+                List<QueryAnalyticsResponse> analysis = customerService.analyzeEnquiries(storeCode, startDate, endDate);
+                return ResponseEntity.ok(analysis);
+        }
+
+       @GetMapping("/inactive-users")
+       public ResponseEntity<List<Customer>> getInactiveUsers(@RequestParam(defaultValue = "90") int days) {
+               List<Customer> users = customerService.getInactiveCustomers(days);
+               if (users.isEmpty()) {
+                       return ResponseEntity.noContent().build();
+               }
+               return ResponseEntity.ok(users);
+       }
 
 }
